@@ -1,0 +1,121 @@
+/* Card Styling */
+.card {
+  border-radius: 0.75rem;
+  background: #f8f9fa;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+h1 {
+  font-size: 5rem; /* You can adjust this value */
+}
+
+.card:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Button Styling */
+.btn {
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Typography */
+.card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+/* Badge Styling */
+.badge {
+  font-size: 0.9rem;
+  padding: 0.4em 0.7em;
+  border-radius: 0.5rem;
+}
+
+/* Background Enhancements */
+body {
+  background-color: #f2f3f7;
+}
+/* Badge Styling */
+.badge-custom {
+  display: inline-block;
+  padding: 0.6em 1.2em;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(90deg, #28a745, #5cd65c);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.badge-custom:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Typography */
+.text-primary {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #007bff;
+}
+
+
+
+.card .text-primary {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.card .text-dark {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.btn-primary {
+  font-size: 1rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #007bff, #0056d2);
+  border: none;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #0056d2, #007bff);
+  transform: translateY(-2px);
+}
+
+.text-success {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.text-dark {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Style the collapsed description */
+.collapsed {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Show only 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 100px; /* Set a max height */
+  transition: max-height 0.3s ease-out;
+}
+
+/* Style for expanded description */
+.text-secondary {
+  max-height: none;
+  transition: max-height 0.3s ease-in;
+}
+

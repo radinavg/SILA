@@ -1,0 +1,132 @@
+/* Carousel container styling */
+//.carousel-container {
+//  max-width: 90%;
+//  margin: 20px auto;
+//  padding: 20px;
+//  background-color: #f3f4f6;
+//  border-radius: 12px;
+//  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+//  text-align: center;
+//}
+
+//.carousel-title {
+//  font-size: 1.8em;
+//  color: #333;
+//  margin-bottom: 20px;
+//  text-align: left;  /* Aligns title to the left */
+//}
+
+.carousel-image-wrapper {
+  position: relative;
+  max-width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Transition for carousel image */
+//.carousel-image {
+//  width: 100%;
+//  height: 100%;
+//  object-fit: cover;
+//  border-radius: 10px;
+//  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+//  opacity: 0;  /* Start with opacity 0 */
+//  transition: opacity 0.5s ease;  /* Fading effect with smooth transition */
+//}
+.btn {
+  background-color: #32cd32;
+  color: white;
+  border: none;
+}
+
+.carousel-image.show {
+  opacity: 1;  /* Image fades in by changing opacity to 1 */
+}
+
+/* Arrow button styling */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.5em;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-arrow.left {
+  left: 10px;
+}
+
+.carousel-arrow.right {
+  right: 10px;
+}
+
+.carousel-height {
+  min-height: 500px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .carousel-image-wrapper {
+    height: 250px;
+  }
+
+  .carousel-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2em;
+  }
+}
+
+.carousel-container {
+  max-width: 90%;
+  min-height: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.carousel-title {
+  font-size: 1.8em;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.carousel-image {
+  height: 500px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .carousel-image {
+    height: 250px;
+  }
+}
+
+.carousel-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}

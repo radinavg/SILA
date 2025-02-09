@@ -1,0 +1,8 @@
+<div class="mb-4">
+  <app-studio-profile-info *ngIf="studio" [(studio)]="studio"></app-studio-profile-info>
+  <app-studio-gallery *ngIf="studio" [(studio)]="studio"></app-studio-gallery>
+  <app-studio-activities *ngIf="studio" [(studioActivities)]="studioActivities" [studioId]="studio.studioId"></app-studio-activities>
+  <app-studio-memberships *ngIf="studio" [studioId]="studio.studioId" [(memberships)]="studio.memberships" ></app-studio-memberships>
+  <app-studio-faq *ngIf="studio" [faqs]="studio.faqs"></app-studio-faq>
+  <app-studio-instructor *ngIf="studio" [instructors]="studio.instructors" [studioId]="studio.studioId" > </app-studio-instructor>
+</div>

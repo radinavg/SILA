@@ -1,0 +1,137 @@
+<div class="container mt-5">
+  <h3 class="mb-4">Users Overview</h3>
+
+  <form class="d-flex flex-row w-auto mb-3 all-users">
+    <button type="submit" hidden="hidden">submit</button>
+
+    <div class="flex-grow-1 me-2">
+      <label for="searchForFirstName" class="col-form-label">
+        First Name
+      </label>
+      <input type="text" id="searchForFirstName" name="searchForFirstName"
+             class="form-control"
+             [(ngModel)]="searchParams.firstName"
+             (ngModelChange)="searchChanged()"
+             placeholder="User first name..."
+      >
+    </div>
+
+    <div class="flex-grow-1 me-2">
+      <label for="searchForSecondName" class="col-form-label">
+        Last Name
+      </label>
+      <input type="text" id="searchForSecondName" name="searchForSecondName"
+             class="form-control"
+             [(ngModel)]="searchParams.lastName"
+             (ngModelChange)="searchChanged()"
+             placeholder="User last name..."
+      >
+    </div>
+
+    <div class="flex-grow-1 me-2">
+      <label for="searchForEmail" class="col-form-label">
+        Email
+      </label>
+      <input type="text" id="searchForEmail" name="searchForEmail"
+             class="form-control"
+             [(ngModel)]="searchParams.email"
+             (ngModelChange)="searchChanged()"
+             placeholder="User email..."
+      >
+    </div>
+
+    <div class="ms-1 me-2">
+      <label for="searchForAdmin" class="col-form-label">
+        Application Admin
+      </label>
+      <select id="searchForAdmin" name="searchForAdmin"
+              class="form-select"
+              [(ngModel)]="isAdmin"
+              (ngModelChange)="searchChanged()">
+        <option value="none"></option>
+        <option value="true">Admin</option>
+        <option value="false">User</option>
+      </select>
+    </div>
+
+    <div class="ms-1">
+      <label for="searchForBlocked" class="col-form-label">
+        Status
+      </label>
+      <select id="searchForBlocked" name="searchForBlocked"
+              class="form-select"
+              [(ngModel)]="isLocked"
+              (ngModelChange)="searchChanged()">
+        <option value="none"></option>
+        <option value="true">Blocked</option>
+        <option value="false">Active</option>
+      </select>
+    </div>
+  </form>
+
+  <div *ngIf="total === 0" class="alert alert-info">
+    No users.
+  </div>
+
+  <div *ngFor="let user of dataSource.data" class="card mb-3">
+    <div class="card-body d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <img
+          [src]="getUserProfileImagePath(user)"
+          alt="Profile Image"
+          class="user-profile-image me-3"
+          loading="lazy"
+        >
+        <div>
+          <h5 class="card-title mb-1">
+            {{ user.firstName }} {{ user.lastName }}
+            <span *ngIf="user.isLocked" class="text-danger">(Blocked)</span>
+            <span class="card-text mb-0 text-primary" *ngIf="user.isAdmin">Admin</span>
+            <span class="card-text mb-0 text-warning" *ngIf="user.isStudioAdmin">Studio Admin</span>
+          </h5>
+          <p class="card-text mb-0">{{ user.email }}</p>
+        </div>
+      </div>
+      <button class="btn btn-info" (click)="openModal(user, userModal)" [attr.data-bs-target]="'#userModal'">
+        View Details
+      </button>
+    </div>
+  </div>
+
+  <ng-template #userModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">User Details</h5>
+      <button type="button" class="btn-close" (click)="modal.dismiss('Close click')" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <p><strong>First Name:</strong> {{ selectedUser?.firstName }}</p>
+      <p><strong>Last Name:</strong> {{ selectedUser?.lastName }}</p>
+      <p><strong>Email:</strong> {{ selectedUser?.email }}</p>
+      <p><strong>Address:</strong> {{ selectedUser?.location }}</p>
+      <p *ngIf="selectedUser?.isLocked" class="text-danger">
+        This user is currently blocked.
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button
+        *ngIf="selectedUser?.isLocked"
+        class="btn btn-success me-2"
+        (click)="unblockUser(selectedUser, modal)">
+        Unblock User
+      </button>
+      <button class="btn btn-danger bi-trash" (click)="deleteUser(selectedUser, modal)">
+        Delete User
+      </button>
+    </div>
+  </ng-template>
+
+  <div *ngIf="total > 0">
+    <mat-paginator
+      [length]="total"
+      [pageSizeOptions]="[10, 20, 30]"
+      (page)="pageChanged($event)"
+      showFirstLastButtons="true"
+      aria-label="Select page of users">
+    </mat-paginator>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">Dear {{ user.firstName }}, are you sure you want to delete your profile?</h5>
+    <button class="close-icon" aria-label="Close" (click)="closeDialog()"><i class="bi bi-x"></i></button>
+  </div>
+  <div class="modal-body">
+    Confirming this action will permanently delete your profile.
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="closeDialog()">Cancel</button>
+    <button type="submit" class="btn btn-danger" (click)="submitForm()">Yes, delete</button>
+
+  </div>
+</div>

@@ -1,0 +1,42 @@
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Card styling */
+.category-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  min-height: 80px;
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+
+  margin: 10px;
+
+  .card-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+    text-align: center;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}

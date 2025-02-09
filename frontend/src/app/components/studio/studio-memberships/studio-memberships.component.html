@@ -1,0 +1,87 @@
+<div  class="alert alert-info " style="margin: 20px 5%;" *ngIf="!studio.memberships || studio.memberships.length === 0" >
+  <span>No memberships are available at the moment.</span>
+  <span *ngIf="isCurrentUserAdminOfThisStudio"> If you want to add some images, click
+    <a style="text-decoration: underline; cursor: pointer"
+       (click)="openModal(addMembershipModal)"
+       [attr.data-bs-target]="'#addGalleryImagesModal'">here</a>.
+  </span>
+</div>
+<div class="activities-container" *ngIf="studio.memberships.length > 0 || isCurrentUserAdminOfThisStudio">
+  <h3 class="activities-title">Memberships</h3>
+
+  <!-- Add Membership Button -->
+  <button *ngIf="isCurrentUserAdminOfThisStudio" class="btn btn-primary add-button" (click)="openModal(addMembershipModal)">
+    Add
+  </button>
+
+  <!-- Slider Navigation -->
+  <button class="slider-arrow left-arrow" (click)="slideLeft()">&#10094;</button>
+  <div class="activities-slider">
+    <div class="activity-cards" [style.transform]="slideTransform">
+      <!-- Membership Cards -->
+      <div class="activity-card card m-3" *ngFor="let membership of memberships" style="max-width: 500px; min-width: 400px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; overflow: hidden; text-align: center;">
+        <div class="card-body p-4">
+          <h5 class="card-title" style="font-size: 1.75rem; font-weight: bold; margin-bottom: 1rem;">
+            {{ membership.name }}
+          </h5>
+          <ul class="list-group list-group-flush">
+            <!-- Min Duration -->
+            <li class="list-group-item d-flex justify-content-center align-items-center" style="font-size: 1.1rem; padding: 1.25rem; border: none;">
+              <span class="text-success" style="font-size: 1.5rem; margin-right: 10px;">&#10003;</span>
+              <strong>Min Duration:</strong> <span>{{ membership.minDuration }} months</span>
+            </li>
+            <!-- Price -->
+            <li class="list-group-item d-flex justify-content-center align-items-center" style="font-size: 1.1rem; padding: 1.25rem; border: none;">
+              <span class="text-success" style="font-size: 1.5rem; margin-right: 10px;">&#10003;</span>
+              <strong>Price: </strong> <span class="text-success"> {{ membership.price }} EUR</span>
+            </li>
+          </ul>
+          <!-- Subscribe Button -->
+          <button class="btn btn-success mt-3"
+                  style="width: 100%; padding: 10px 0; font-size: 1.2rem; border-radius: 25px; transition: background-color 0.3s ease;"
+                  [disabled]="isUserSubscribedToMembership(membership)"
+                  (click)="subscribeToMembership(membership)">
+            {{ isUserSubscribedToMembership(membership) ? 'Subscribed' : 'Subscribe Now' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Slider Navigation -->
+  <button class="slider-arrow right-arrow" (click)="slideRight()">&#10095;</button>
+</div>
+
+
+<ng-template #addMembershipModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">New Membership</h5>
+  </div>
+  <form [formGroup]="newMembershipForm" (ngSubmit)="onSubmit()">
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="name" class="col-form-label">Name:</label>
+        <input type="text" class="form-control" id="name" formControlName="name">
+      </div>
+      <div class="form-group">
+        <label for="price" class="col-form-label">Price:</label>
+        <input type="number" class="form-control" id="price" formControlName="price">
+      </div>
+      <div class="form-group">
+        <label for="duration" class="col-form-label">Duration (months):</label>
+        <input type="number" class="form-control" id="duration" formControlName="duration">
+      </div>
+      <div class="form-group">
+        <label for="minDuration" class="col-form-label">Minimum Duration (months):</label>
+        <input type="number" class="form-control" id="minDuration" formControlName="minDuration">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-success" [disabled]="newMembershipForm.invalid">
+        Save
+      </button>
+      <button type="button" class="btn btn-danger" (click)="modal.dismiss('Close click')">
+        Cancel
+      </button>
+    </div>
+  </form>
+</ng-template>

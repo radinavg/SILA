@@ -1,0 +1,115 @@
+<div class="container mt-5" style="max-width: 500px;">
+  <!-- Header Section -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-success mb-0">Register Your Studio</h2>
+    <a class="navbar-brand" href="#">
+      <img src="assets/silaTextLogo.png" alt="Logo" class="img-fluid" style="max-width: 200px;">
+    </a>
+  </div>
+
+  <!-- Subheader -->
+  <div class="text-start mb-3">
+    <h6 class="text-success" style="font-size: 1.25rem;">Enter your studio details</h6>
+  </div>
+
+  <!-- Card Section -->
+  <div class="card mx-auto border-0">
+    <div class="card-body">
+      <form [formGroup]="studioForm" (ngSubmit)="onSubmit()">
+        <!-- Image and Name Section -->
+        <div class="form-group text-center mb-4">
+          <div class="d-flex flex-column align-items-center">
+            <!-- Image Placeholder -->
+            <div class="image-placeholder position-relative border rounded-circle d-flex justify-content-center align-items-center"
+                 style="width: 150px; height: 150px; overflow: hidden; background-color: #f8f9fa;">
+              <img *ngIf="imagePreview" [src]="imagePreview" alt="Image Preview"
+                   style="max-width: 100%; max-height: 100%; object-fit: cover;">
+              <img *ngIf="!imagePreview" src="./assets/image-placeholder.jpg" alt="Placeholder Image"
+                   style="max-width: 100%; max-height: 100%; object-fit: cover;">
+
+              <!-- Hidden file input -->
+              <input type="file" id="image" (change)="onFileSelected($event)" style="display: none;">
+              <!-- Overlay Button -->
+              <label for="image"
+                     class="position-absolute w-100 h-100 d-flex justify-content-center align-items-center overlay"
+                     style="background-color: rgba(0, 0, 0, 0.5); color: #fff; opacity: 0; transition: opacity 0.3s; cursor: pointer;">
+                {{ imagePreview ? 'Change Image' : 'Choose Image' }}
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Studio Name Field -->
+        <div class="form-group mb-4">
+          <label for="name" class="text-success fw-bold">Studio Name <span style="color: red">*</span></label>
+          <input type="text" id="name" formControlName="name" class="form-control" placeholder="Enter studio name" />
+        </div>
+
+        <!-- Studio Email and Password -->
+        <div class="form-group mb-4">
+          <label for="inputEMail" class="text-success fw-bold">E-Mail <span style="color: red">*</span></label>
+          <input type="email" id="inputEMail" formControlName="email" class="form-control" placeholder="Enter your E-Mail">
+        </div>
+
+        <div class="form-group mb-4">
+          <label for="inputPassword" class="text-success fw-bold">Password <span style="color: red">*</span></label>
+          <input type="password" id="inputPassword" formControlName="password" class="form-control" placeholder="Enter your password">
+        </div>
+
+        <div class="form-group mb-4">
+          <label for="retypePassword" class="text-success fw-bold">Retype your password <span style="color: red">*</span></label>
+          <input type="password" id="retypePassword" formControlName="confirmPassword" class="form-control" placeholder="Retype your password">
+        </div>
+
+        <!-- Description Field -->
+        <div class="form-group mb-4">
+          <label for="description" class="text-success fw-bold">Description <span style="color: red">*</span></label>
+          <textarea id="description" formControlName="description" class="form-control" placeholder="Enter description"></textarea>
+        </div>
+
+        <!-- Location Field -->
+        <div class="form-group position-relative mb-4">
+          <label for="inputLocation" class="text-success fw-bold">Location <span style="color: red">*</span></label>
+          <input
+            type="text"
+            id="inputLocation"
+            formControlName="location"
+            class="form-control"
+            placeholder="Enter studio locations"
+            (focus)="locationSuggestions = []"
+            (blur)="clearLocationSuggestions()"
+            required>
+
+          <ul
+            *ngIf="locationSuggestions.length > 0"
+            class="list-group position-absolute w-100"
+            style="z-index: 1050; max-height: 200px; overflow-y: auto;">
+            <li
+              *ngFor="let suggestion of locationSuggestions"
+              class="list-group-item list-group-item-action"
+              (click)="selectLocation(suggestion)"
+              style="cursor: pointer;">
+              {{ suggestion.display_name }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-success btn-block w-100">Register Studio</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="text-center mt-4">
+    <div class="d-flex align-items-center justify-content-center">
+      <div class="flex-grow-1 border-top border-success"></div>
+      <span class="mx-3 text-success">Or</span>
+      <div class="flex-grow-1 border-top border-success"></div>
+    </div>
+    <div class="mt-3">
+      <h6 class="text-success d-inline">Your studio is already on Sila? </h6>
+      <a [routerLink]="['/login']" class="text-success">Sign In</a>
+    </div>
+  </footer>
+</div>

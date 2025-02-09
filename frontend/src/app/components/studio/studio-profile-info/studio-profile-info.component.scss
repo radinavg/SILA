@@ -1,0 +1,263 @@
+/* Profile container - responsive width */
+.profile-container {
+  max-width: 90%; /* Make the container fluid on smaller screens */
+  width: 100%;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  text-align: left;
+}
+
+/* Profile header with image and username */
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+}
+
+.profile-image-and-name {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Profile image styling */
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+/* Username styling */
+.username {
+  margin: 0;
+  font-size: 2em;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Star rating styling */
+.star-rating {
+  color: #ffc107;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rating-points {
+  font-size: 0.9em;
+  color: #555;
+  margin-left: 8px;
+}
+
+.review-count {
+  font-size: 0.9em;
+  color: #777;
+}
+
+/* Profile details styling */
+.profile-details {
+  margin-top: 30px;
+}
+
+.description {
+  font-size: 1.2em;
+  color: #555;
+  margin: 15px 0;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1em;
+  color: #777;
+}
+
+.location-icon {
+  color: #32cd32;
+  font-size: 1.2em;
+}
+
+.review-count:hover {
+  text-decoration: underline;
+}
+
+/* Book Now button styling */
+.book-now-button {
+
+  position: absolute;
+  width: 130px;
+  height: 50px;
+  top: 60px;
+  right: 40px;
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #32cd32; /* Green color */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.like-button-section {
+  margin-top: 20px;
+  margin-right: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.like-button {
+  align-self: center;
+  transition: 0.3s ease;
+}
+
+.liked {
+  color: red;
+}
+
+.unliked {
+  color: #3c3e41;
+}
+
+.unliked:hover {
+  color: red;
+}
+
+.heart-icon {
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+
+}
+
+
+
+
+.profile-container {
+  position: relative;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .username {
+    font-size: 1.8em;
+  }
+
+  .star-rating {
+    font-size: 1.2em;
+  }
+
+  .description {
+    font-size: 1.1em;
+  }
+
+  .location {
+    font-size: 0.9em;
+  }
+}
+
+.pen-icon {
+  color: limegreen;
+  cursor: pointer;
+}
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .username {
+    font-size: 1.2em;
+  }
+
+  .star-rating {
+    font-size: 1em;
+    justify-content: center;
+  }
+
+  .description, .location {
+    font-size: 0.9em;
+    text-align: center;
+  }
+
+  .book-now-button {
+    top: 10px;
+    right: 10px;
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-container {
+    padding: 15px;
+  }
+
+  .profile-image {
+    width: 70px;
+    height: 70px;
+  }
+
+  .username {
+    font-size: 1.1em;
+  }
+
+  .star-rating {
+    font-size: 0.9em;
+  }
+
+  .description, .location {
+    font-size: 0.8em;
+  }
+
+  .like-button-section {
+    gap: 5px;
+  }
+
+  .book-now-button {
+    font-size: 0.7em;
+    padding: 8px 12px;
+  }
+}

@@ -1,0 +1,56 @@
+<header class="header">
+  <div class="logo">
+    <a class="navbar-brand ml-lg-5">
+    <img src="assets/silaTextLogoGreenBackground.png" routerLink="/home" alt="Logo" width="150" height="70">
+    </a>
+  </div>
+  <nav class="nav">
+    <a routerLink="/">
+      <i class="bi bi-house"></i>
+      <span class="nav-text">Home</span>
+    </a>
+    <a routerLink="/explore">
+      <i class="bi bi-search"></i>
+      <span class="nav-text">Explore</span>
+    </a>
+    <a *ngIf="authService.getUserRole() != 'ADMIN'" routerLink="/bookings">
+      <i class="bi bi-calendar-check"></i>
+      <span class="nav-text">My Bookings</span>
+    </a>
+    <a *ngIf="authService.getUserRole() != 'ADMIN'" routerLink="/friends">
+      <i class="bi bi-people"></i>
+      <span class="nav-text">Friends</span>
+    </a>
+    <a *ngIf="authService.getUserRole() == 'ADMIN'" routerLink="/admin/studios">
+      <i class="bi bi-list"></i>
+      <span class="nav-text">Studios</span>
+    </a>
+    <a *ngIf="authService.getUserRole() == 'ADMIN'" routerLink="/admin/users">
+      <i class="bi bi-person-gear"></i>
+      <span class="nav-text">Users</span>
+    </a>
+  </nav>
+  <div class="profile">
+    <img
+      [src]="profileImageUrl"
+      alt="User Profile"
+      class="profile-image"
+      loading="lazy"
+    >
+    <nav class="nav dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-toggle="dropdown"
+         aria-haspopup="true" aria-expanded="false">
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdownUser">
+        <a *ngIf="authService.getUserRole() == 'STUDIO_ADMIN'" class="dropdown-item" (click)="navigateToYourStudio()"><i class="bi bi-collection"></i> Your Studio</a>
+        <a class="dropdown-item" routerLink="/user/profile"><i class="bi bi-person"></i> Your Profile</a>
+        <a class="dropdown-item" routerLink="/user/notifications"><i class="bi bi-bell"></i> Notifications</a>
+        <a class="dropdown-item" routerLink="/user/my-friends"><i class="bi bi-people"></i> My Friends</a>
+        <a class="dropdown-item" (click)="authService.logoutUser()" routerLink="/login"><i class="bi bi-box-arrow-left"></i> Log Out</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+
+

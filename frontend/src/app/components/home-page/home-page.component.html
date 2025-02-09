@@ -1,0 +1,136 @@
+<div class="container mt-5">
+  <div class="homepage" *ngIf="authService.isLoggedIn()">
+      <h1 class="mb-3">Welcome to Sila, {{ user?.firstName }}!</h1>
+      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-2 mb-4">
+          <div class="card text-center category-card p-3 col" [routerLink]="['/explore']">
+              <h5 class="card-title mt-3">Explore studios and activities</h5>
+          </div>
+          <div *ngIf="authService.getUserRole() != 'ADMIN'" class="card text-center category-card p-3  col"
+               [routerLink]="['/friends']">
+              <h5 class="card-title mt-3">Connect with friends</h5>
+          </div>
+          <div *ngIf="authService.getUserRole() != 'ADMIN'" class="card text-center category-card p-3  col"
+               [routerLink]="['/bookings']">
+              <h5 class="card-title mt-3">Manage your bookings</h5>
+          </div>
+          <div *ngIf="authService.getUserRole() == 'ADMIN'" class="card text-center category-card p-3  col"
+               [routerLink]="['/admin/studios']">
+              <h5 class="card-title mt-3">Manage studios</h5>
+          </div>
+          <div *ngIf="authService.getUserRole() == 'ADMIN'" class="card text-center category-card p-3  col"
+               [routerLink]="['/admin/users']">
+              <h5 class="card-title mt-3">Manage users</h5>
+          </div>
+      </div>
+
+      <h3>Liked Studios</h3>
+      <div *ngIf="likedStudios?.length === 0" class="alert alert-info d-flex justify-content-between align-items-center">
+        <p class="mb-0">You have no liked studios yet. Start exploring now!</p>
+        <a [routerLink]="['/explore']" class="btn btn-primary">
+          Explore
+        </a>
+      </div>
+      <div class="studios-list mt-4 mb-3">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
+          <div class="col" *ngFor="let studio of likedStudios">
+            <div class="card h-100 shadow-sm">
+              <img
+                [src]="getProfileImage(studio)"
+                alt="{{ studio.profileImage?.name || studio.name }}"
+                class="card-img-top"
+                loading="lazy"
+                style="object-fit: cover; height: 150px;"
+              >
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title text-dark fw-bold mb-2">{{ studio.name }}</h5>
+                <p class="card-text text-muted mb-1">
+                  <i class="bi bi-geo-alt-fill"></i> {{ studio.location }}
+                </p>
+                <p class="card-text text-muted flex-grow-1">{{ studio.description }}</p>
+                <a
+                  [routerLink]="['/studio', studio.studioId]"
+                  class="btn btn-success text-uppercase fw-semibold mt-auto"
+                  style="background-color: #32cd32; border-color: #32cd32; color: white;"
+                >
+                  View Details
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div *ngIf="studioRecommendations?.length !== 0">
+      <h3>Recommended Studios</h3>
+      <div class="studios-list mt-4 mb-3">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
+          <div class="col" *ngFor="let studio of studioRecommendations">
+            <div class="card h-100 shadow-sm">
+              <img
+                [src]="getProfileImage(studio)"
+                alt="{{ studio.profileImage?.name || studio.name }}"
+                class="card-img-top"
+                loading="lazy"
+                style="object-fit: cover; height: 150px;"
+              >
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title text-dark fw-bold mb-2">{{ studio.name }}</h5>
+                <p class="card-text text-muted mb-1">
+                  <i class="bi bi-geo-alt-fill"></i> {{ studio.location }}
+                </p>
+                <p class="card-text text-muted flex-grow-1">{{ studio.description }}</p>
+                <a
+                  [routerLink]="['/studio', studio.studioId]"
+                  class="btn btn-success text-uppercase fw-semibold mt-auto"
+                  style="background-color: #32cd32; border-color: #32cd32; color: white;"
+                >
+                  View Details
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <h3>Recommended Activities</h3>
+      <div *ngIf="activityRecommendations?.length === 0" class="alert alert-info d-flex justify-content-between align-items-center">
+        <p class="mb-0">There are no recommendations. Set your preferences!</p>
+        <a [routerLink]="['/preferences']" class="btn btn-primary">
+          Set Preferences
+        </a>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4 mb-4">
+          <div class="col" *ngFor="let activity of activityRecommendations">
+            <div class="card h-100 shadow-sm">
+              <img
+                [src]="getImage(activity)"
+                class="card-img-top"
+                alt="{{ activity.name }} image"
+                loading="lazy"
+                style="object-fit: cover; height: 150px;"
+              >
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title text-dark fw-bold">{{ activity.name }}</h5>
+                <p class="card-text text-muted">{{ activity.description }}</p>
+                <p class="text-muted mb-1">
+                  <strong>Duration:</strong> {{ activity.duration }} min
+                </p>
+                <p class="text-muted mb-3">
+                  <strong>Price:</strong> {{ activity.price }} EUR
+                </p>
+                <a
+                  [routerLink]="['/activity', activity.studioActivityId]"
+                  class="btn btn-success mt-auto text-uppercase fw-semibold"
+                  style="background-color: #32cd32; border-color: #32cd32; color: white;"
+                >
+                  View Details
+                </a>
+              </div>
+            </div>
+          </div>
+      </div>
+
+    </div>
+</div>

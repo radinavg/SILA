@@ -1,0 +1,27 @@
+# Stage 1: Use a Maven image for dependency resolution
+FROM maven:3.9.6-eclipse-temurin-21 AS maven-build
+
+WORKDIR /app
+
+# Copy and resolve dependencies
+COPY pom.xml .
+RUN mvn dependency:go-offline
+
+# Copy source files after dependencies are resolved
+COPY checkstyle.xml .
+COPY src ./src
+
+RUN mvn clean package -Dmaven.test.skip=true
+
+# Stage 2: Use a smaller Java 21 runtime for the application
+FROM eclipse-temurin:21-jre AS runtime
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the built JAR file from the previous stage
+COPY --from=maven-build /app/target/sila-0.0.1-SNAPSHOT.jar ./app.jar
+
+# Run the application
+CMD ["java", "-Dspring.profiles.active=datagen-large", "-jar", "app.jar"]
+

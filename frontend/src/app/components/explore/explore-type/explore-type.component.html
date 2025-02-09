@@ -1,0 +1,47 @@
+<div class="container mt-5">
+  <h3 class="mb-4">All activities in category {{formatActivityName(activityType.activityType)}}</h3>
+
+  <div *ngIf="total === 0" class="alert alert-info">
+    There are no activities in this category.
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-4">
+    <div class="col" *ngFor="let activity of dataSource.data">
+      <div class="card h-100 shadow-sm">
+        <img
+          [src]="getImage(activity)"
+          class="card-img-top"
+          alt="{{ activity.name }} image"
+          loading="lazy"
+          style="object-fit: cover; height: 150px;"
+        >
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title text-dark fw-bold">{{ activity.name }}</h5>
+          <p class="card-text text-muted">{{ activity.description }}</p>
+          <p class="text-muted mb-1">
+            <strong>Duration:</strong> {{ activity.duration }} min
+          </p>
+          <p class="text-muted mb-3">
+            <strong>Price:</strong> {{ activity.price }} EUR
+          </p>
+          <a
+            [routerLink]="['/activity', activity.studioActivityId]"
+            class="btn btn-success mt-auto text-uppercase fw-semibold"
+            style="background-color: #32cd32; border-color: #32cd32; color: white;"
+          >
+            View Details
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="total > 12">
+    <mat-paginator
+      [length]="total"
+      [pageSizeOptions]="[12, 24, 36]"
+      (page)="pageChanged($event)"
+      showFirstLastButtons="true"
+      aria-label="Select page of studio activities">
+    </mat-paginator>
+  </div>
+</div>

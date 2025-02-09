@@ -1,0 +1,39 @@
+<div class="m-5">
+  <h2 class="ms-5">Your Notifications:</h2>
+  <div class="notifications-container mt-4">
+    <div class="notification" *ngFor="let notification of this.mergedNotifications">
+      <div *ngIf="isNotificationFriendshipRequest(notification)" class="card">
+        <h5 class="card-header">Friendship Request</h5>
+        <div class="card-body">
+          <img [src]="globals.formatProfileImageUrl(notification.from.profileImagePath) || 'assets/default-profile.png'" alt="profile image" class="rounded-circle mb-1" style="width: 50px; height: 50px;"/>
+          <h5 class="card-title">{{ notification.from.firstName + ' ' + notification.from.lastName}} sent you a friendship request.</h5>
+          <p class="card-text">Received at: {{notification.requestDateTime | date: 'MMM d, y, h:mm a'}}</p>
+          <div class="d-flex justify-content-end gap-2">
+            <a href="#" class="btn btn-success" (click)="onAcceptFriendshipRequest(notification)">Accept</a>
+            <a href="#" class="btn btn-danger" (click)="onDeclineFriendshipRequest(notification)">Decline</a>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!isNotificationFriendshipRequest(notification)" class="card">
+        <h5 class="card-header">Activity Invitation</h5>
+        <div class="card-body">
+          <div class="activity-short-info mb-3">
+            <img [src]="globals.formatProfileImageUrl(notification.from.profileImagePath) || 'assets/default-profile.png'" alt="profile image" class="rounded-circle mb-1" style="width: 50px; height: 50px;"/>
+            <img [src]="globals.formatProfileImageUrl(notification.studioActivity.profileImage.path) || 'assets/image-icon-600nw-211642900.webp' " alt="profile image" class="rounded-2" style="width: 5em; height: auto; object-fit: cover;"/>
+            <h3>{{notification.studioActivity.name}}</h3>
+          </div>
+          <h5 class="card-title">{{ notification.from.firstName + ' ' + notification.from.lastName}} shared an activity with you.</h5>
+          <p class="card-text">Received at: {{notification.requestDateTime | date: 'MMM d, y, h:mm a'}}</p>
+          <div class="d-flex justify-content-end gap-2">
+            <a [routerLink]="'/activity/' + notification.studioActivity.studioActivityId"
+               class="btn btn-primary">View Activity</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

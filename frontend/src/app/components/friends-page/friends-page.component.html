@@ -1,0 +1,88 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Search for Friends</h1>
+
+  <!-- Search Bar -->
+  <form (ngSubmit)="searchUsers()" class="search-form mb-4">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="First Name"
+          [(ngModel)]="searchQuery.firstName"
+          (ngModelChange)="searchUsers()"
+          name="firstName"/>
+      </div>
+      <div class="col-md-4 mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Last Name"
+          [(ngModel)]="searchQuery.lastName"
+          (ngModelChange)="searchUsers()"
+          name="lastName"/>
+      </div>
+      <div class="col-md-4 mb-3">
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Email"
+          [(ngModel)]="searchQuery.email"
+          (ngModelChange)="searchUsers()"
+          name="email"/>
+      </div>
+    </div>
+  </form>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Search Results -->
+  <div *ngIf="users.length > 0 && !isLoading" class="user-list mt-4">
+    <div class="card mb-3" *ngFor="let user of users">
+      <div class="card-body d-flex align-items-center">
+        <!-- User Profile Image -->
+        <img
+          [src]="user.profileImagePath ? globals.formatProfileImageUrl(user.profileImagePath) : 'assets/default-profile.png'"
+          alt="{{ user.firstName }} {{ user.lastName }}"
+          class="rounded-circle me-3"
+          style="width: 50px; height: 50px;" />
+
+        <!-- User Info Section -->
+        <div>
+          <h5 class="card-title mb-0">{{ user.firstName }} {{ user.lastName }}</h5>
+          <small class="text-muted">{{ user.location }}</small>
+        </div>
+
+        <!-- Action Section -->
+        <div class="ms-auto">
+          <!-- If already sent, show a styled div instead of a button -->
+          <div *ngIf="isAlreadySent(user)" class="already-sent text-success">
+            <i class="bi bi-check-circle me-1"></i> Request Sent
+          </div>
+
+          <!-- Otherwise, show the button -->
+          <button
+            *ngIf="!isAlreadySent(user)"
+            class="btn btn-outline-primary"
+            (click)="sendFriendRequest(user)">
+            Send Friend Request
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <!-- No Results -->
+  <div *ngIf="!isLoading && users.length === 0" class="text-center mt-4">
+    <p>No users found. Try adjusting your search criteria.</p>
+  </div>
+</div>

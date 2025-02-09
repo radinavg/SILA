@@ -1,0 +1,158 @@
+<div class="container mt-4">
+  <div class="d-flex flex-column align-items-center">
+    <div class="user-view w-100">
+
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <div class="profile-image-container">
+          <div class="profile-image">
+            <img
+              [src]="profileImageUrl"
+              alt="Profile Picture"
+              loading="lazy">
+          </div>
+          <div class="profile-image-overlay">
+            <input type="file" id="uploadProfileImage" (change)="onImageUpload($event)" hidden>
+            <label for="uploadProfileImage" class="camera-icon">
+              <fa-icon [icon]="'camera'"></fa-icon>
+            </label>
+          </div>
+        </div>
+        <h1>{{ heading() }}</h1>
+      </div>
+
+
+      <!-- Collapsible Fields -->
+      <div class="accordion" id="userFieldsAccordion">
+        <div class="accordion-item" *ngFor="let field of userFields; let i = index">
+          <h2 class="accordion-header" id="heading-{{i}}">
+            <button
+              class="accordion-button"
+              type="button"
+              [class.collapsed]="!field.expanded"
+              [attr.aria-expanded]="field.expanded"
+              (click)="toggleField(i)"
+            >
+              {{ field.label }}
+            </button>
+          </h2>
+
+          <div
+            [id]="'collapse-' + i"
+            class="accordion-collapse collapse"
+            [class.show]="field.expanded"
+            aria-labelledby="'heading-' + i"
+          >
+            <div class="accordion-body">
+              <div class="editable-row mb-3">
+                <label class="form-label">{{ field.label }}</label>
+
+                <!-- For Email -->
+                <div *ngIf="field.key === 'email'" class="form-text">{{ user[field.key] }}</div>
+
+                <!-- For Gender -->
+                <div *ngIf="field.key === 'gender' && !field.editing" class="d-flex justify-content-between">
+                  <span>{{ user[field.key] }}</span>
+                  <button class="btn btn-link p-0" (click)="editField(i)">Edit</button>
+                </div>
+                <div *ngIf="field.key === 'gender' && field.editing">
+                  <select
+                    id="inputGender"
+                    name="gender"
+                    [(ngModel)]="user.gender"
+                    class="form-select mb-3"
+                    required
+                  >
+                    <option [ngValue]="null" disabled>Gender</option>
+                    <option [ngValue]="'MALE'">Male</option>
+                    <option [ngValue]="'FEMALE'">Female</option>
+                    <option [ngValue]="'DIVERSE'">Diverse</option>
+                  </select>
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-success btn-sm" (click)="saveField(i)">Save</button>
+                    <button class="btn btn-secondary btn-sm" (click)="cancelEdit(i)">Cancel</button>
+                  </div>
+                </div>
+
+                <!-- For Address -->
+                <div *ngIf="field.key === 'location' && !field.editing" class="d-flex justify-content-between">
+                  <span>{{ user[field.key] }}</span>
+                  <button class="btn btn-link p-0" (click)="editField(i)">Edit</button>
+                </div>
+                <div *ngIf="field.key === 'location' && field.editing" class="position-relative">
+                  <input
+                    type="text"
+                    [(ngModel)]="user.location"
+                    (input)="fetchLocationSuggestions(user.location)"
+                    (blur)="clearLocationSuggestions()"
+                    class="form-control mb-3"
+                    placeholder="Search for your address"
+                  />
+                  <ul
+                    *ngIf="locationSuggestions.length > 0"
+                    class="list-group position-absolute w-100"
+                    style="z-index: 1050; max-height: 200px; overflow-y: auto;"
+                  >
+                    <li
+                      *ngFor="let suggestion of locationSuggestions"
+                      class="list-group-item list-group-item-action"
+                      (mousedown)="selectLocation(suggestion)"
+                      style="cursor: pointer;"
+                    >
+                      {{ suggestion.display_name }}
+                    </li>
+                  </ul>
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-success btn-sm" (click)="saveField(i)">Save</button>
+                    <button class="btn btn-secondary btn-sm" (click)="cancelEdit(i)">Cancel</button>
+                  </div>
+                </div>
+
+                <!-- For Other Fields -->
+                <div *ngIf="field.key !== 'email' && field.key !== 'gender' && field.key !== 'location' && !field.editing" class="d-flex justify-content-between">
+                  <span>{{ user[field.key] }}</span>
+                  <button class="btn btn-link p-0" (click)="editField(i)">Edit</button>
+                </div>
+                <div *ngIf="field.key !== 'email' && field.key !== 'gender' && field.key !== 'location' && field.editing">
+                  <input [(ngModel)]="user[field.key]" type="text" class="form-control mb-3">
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-success btn-sm" (click)="saveField(i)">Save</button>
+                    <button class="btn btn-secondary btn-sm" (click)="cancelEdit(i)">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Display Memberships -->
+      <div *ngIf="currentUserMemberships != null && currentUserMemberships.length > 0" class="mt-4 w-100">
+        <h2>Your Subscribed Memberships</h2>
+        <div *ngFor="let membership of currentUserMemberships; let i = index" class="membership-card card p-3 mb-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5>{{ membership.name }}</h5>
+              <p>Price: {{ membership.price }} EUR</p>
+              <p>Duration: {{ membership.minDuration }} months</p>
+            </div>
+            <button class="btn btn-danger btn-sm" (click)="deleteMembership(membership.membershipId)">Unsubscribe</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="actions mt-4">
+        <a class="btn btn-custom btn-block w-100 mb-3" [routerLink]="['/preferences']">
+          <i class="bi-bar-chart"></i> Set preferences
+        </a>
+        <a class="btn btn-custom btn-block w-100 mb-3" [routerLink]="['../password/update']">
+          <i class="bi bi-key"></i> Change Password
+        </a>
+        <button class="btn btn-danger btn-block w-100" (click)="openDeleteConfirmation()">
+          <i class="bi bi-trash"></i> Delete Account
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

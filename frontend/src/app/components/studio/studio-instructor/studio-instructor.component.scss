@@ -1,0 +1,73 @@
+/* General Styling for the Team Section */
+.studio-instructors-container {
+  max-width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.instructors-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.instructor-card {
+  max-width: 300px;
+  flex: 1 1 calc(25% - 20px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  text-align: center;
+}
+
+.instructor-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-top: 15px;
+}
+
+/* Add Instructor Button Styling */
+.add-instructor-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 300px;
+}
+
+.add-card {
+  min-width: 300px;
+  max-width: 300px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f4f6;
+  border: 2px dashed #32cd32;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.fa-plus-icon {
+  font-size: 2.5rem;
+  color: #32cd32;
+}
+
+.add-card:hover {
+  background-color: #e2f8e2;
+  border-color: #28a745;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .instructor-card,
+  .add-card {
+    min-width: 200px;
+  }
+}

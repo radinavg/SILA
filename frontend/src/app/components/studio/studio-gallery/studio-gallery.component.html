@@ -1,0 +1,109 @@
+
+<div  class="alert alert-info " style="margin: 20px 5%;" *ngIf="!studio.galleryImages || studio.galleryImages.length === 0" >
+  <span>No studio images are available at the moment.</span>
+  <span *ngIf="isCurrentUserAdminOfThisStudio"> If you want to add some images, click
+    <a style="text-decoration: underline; cursor: pointer"
+       (click)="openModal(addGalleryImagesModal)"
+       [attr.data-bs-target]="'#addGalleryImagesModal'">here</a>.
+  </span>
+</div>
+<div class="carousel-container" *ngIf="studio.galleryImages && studio.galleryImages.length !== 0">
+
+  <div class="carousel-header">
+    <h3 class="carousel-title" style="margin-bottom: 0">Gallery</h3>
+    <button class="btn "
+            *ngIf="authService.getUserRole() === 'STUDIO_ADMIN'"
+            (click)="openModal(addGalleryImagesModal)"
+            [attr.data-bs-target]="'#addGalleryImagesModal'">
+      Add
+    </button>
+  </div>
+
+
+  <!-- Bootstrap Carousel -->
+  <div id="studioGalleryCarousel" class="carousel slide carousel-height" data-bs-ride="carousel">
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+      <button
+        *ngFor="let image of studio.galleryImages; let i = index"
+        type="button"
+        data-bs-target="#studioGalleryCarousel"
+        [attr.data-bs-slide-to]="i"
+        [class.active]="i === currentImageIndex">
+      </button>
+    </div>
+
+    <!-- Carousel Items -->
+    <div class="carousel-inner ">
+      <div
+        *ngFor="let image of studio.galleryImages; let i = index"
+        class="carousel-item"
+        [class.active]="i === currentImageIndex">
+        <img [src]="globals.formatProfileImageUrl(image.path)" class="d-block w-100 carousel-image" alt="Studio Image">
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#studioGalleryCarousel" data-bs-slide="prev" (click)="prevImage()">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#studioGalleryCarousel" data-bs-slide="next" (click)="nextImage()">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+
+
+<ng-template #addGalleryImagesModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="modalTitle">Add Gallery Images</h5>
+  </div>
+
+  <form [formGroup]="newImagesGroup" (ngSubmit)="onSubmit(modal)">
+    <div class="modal-body">
+      <div class="form-group">
+
+
+        <div class="image-placeholder position-relative border rounded d-flex justify-content-center align-items-center"
+             style="width: 120px; height: 120px; overflow: hidden; background-color: #f8f9fa;">
+
+          <img src="./assets/image-placeholder.jpg" alt="Placeholder Image"
+               style="max-width: 100%; max-height: 100%; object-fit: cover;">
+
+          <label for="image"
+                 class="position-absolute w-100 h-100 d-flex justify-content-center align-items-center overlay"
+                 style="background-color: rgba(0, 0, 0, 0.5); color: #fff; opacity: 0; transition: opacity 0.3s; cursor: pointer;">
+            {{ imagePreviews ? 'Change Image' : 'Choose Image' }}
+          </label>
+          <input type="file" id="image" (change)="onFileSelected($event)" style="display: none;" accept="image/*" formControlName="images">
+        </div>
+
+        <div *ngIf="imagePreviews.length > 0">
+          <h5>Preview</h5>
+          <div class="d-flex flex-wrap">
+            <div
+              *ngFor="let img of imagePreviews"
+              class="m-2"
+              style="max-height: 100px; max-width: 100px; overflow: hidden; border: 1px solid #ddd;"
+            >
+              <img [src]="img" alt="Image preview" class="img-fluid" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-success" [disabled]="newImagesGroup.invalid">
+        <i class="fas fa-check"></i> Save
+      </button>
+      <button type="button" class="btn btn-danger" (click)="onCancel(modal)">
+        <i class="fas fa-times" ></i> Cancel
+      </button>
+    </div>
+  </form>
+</ng-template>
+

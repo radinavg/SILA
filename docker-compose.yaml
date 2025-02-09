@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: sila-db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  spring-boot-app:
+    build:
+      context: ./backend
+      dockerfile: ${DOCKERFILE:-Dockerfile-Large}
+    container_name: spring-boot-app
+    depends_on:
+      - postgres-db
+      - datascience
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/sila-db
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+      JAVA_TOOL_OPTIONS: >-
+        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    volumes:
+      - ./assets:/app/assets
+    
+  datascience:
+      build:
+        context: ./datascience
+        dockerfile: Dockerfile
+      container_name: datascience
+      depends_on:
+        - postgres-db  
+      environment:
+        - DATABASE_URL=postgresql://admin:admin@postgres-db:5432/sila-db
+        - SECRET_KEY=your-secret-key
+      ports:
+        - "5000:5000"
+  
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    depends_on:
+      - spring-boot-app
+    ports:
+      - "4200:80"
+
+volumes:
+  pgdata:

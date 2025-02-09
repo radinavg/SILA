@@ -1,0 +1,97 @@
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Search Bar Styling */
+.search-form .form-control {
+  border-radius: 20px;
+  padding: 0.75rem;
+}
+
+.search-form button {
+  background-color: #32cd32;
+  color: white;
+  border-radius: 20px;
+  padding: 0.75rem;
+}
+
+.search-form button:hover {
+  background-color: #0aa30a;
+}
+
+/* Studio Card (User Card) Styling */
+.studio-card {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.studio-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-body {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.card-text {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.btn-outline-primary {
+  border-color: #32cd32;
+  color: #32cd32;
+  background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+  background-color: #32cd32;
+  color: white;
+}
+
+/* Spinner Styling */
+.spinner-border {
+  border-color: #32cd32;
+}
+
+/* No Results Styling */
+.text-center {
+  font-size: 1.2rem;
+  color: #888;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .studio-card {
+    flex-direction: column;
+    max-width: 100%; /* Full width cards on smaller screens */
+    margin: 10px 0;
+  }
+
+  .card-img-top {
+    height: 100px;
+  }
+}

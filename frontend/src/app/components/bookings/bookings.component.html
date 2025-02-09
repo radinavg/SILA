@@ -1,0 +1,64 @@
+<div class="container mt-5 mb-4">
+  <div class="bookings mt-4">
+    <h3 class="mb-4">Current activities</h3>
+
+    <div *ngIf="currentBookings.length === 0" class="alert alert-info">
+      You have no current bookings.
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+      <div class="col" *ngFor="let activity of currentBookings">
+        <div class="card activity-card">
+          <img
+            [src]="getImage(activity)"
+            class="card-img-top"
+            alt="{{ activity.name }} image"
+            loading="lazy"
+          >
+          <div class="card-body">
+            <h5 class="card-title">{{ activity.name }}</h5>
+
+            <p class="activity-description">{{ activity.description }}</p>
+            <p class="activity-begin">
+              Begins at: {{this.formatDateTime(activity.dateTime)}}
+            </p>
+            <p class="activity-time">Duration: {{activity.duration}} min</p>
+            <p class="activity-price">Price: {{ activity.price }} EUR</p>
+            <a [routerLink]="['/activity', activity.studioActivityId]" class="btn btn-primary">View Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bookings mt-4">
+      <h3 class="mb-4">Past activities</h3>
+
+      <div *ngIf="pastBookings.length === 0" class="alert alert-info">
+        You have no past bookings.
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+        <div class="col" *ngFor="let activity of pastBookings">
+          <div class="card activity-card">
+            <img
+              [src]="getImage(activity)"
+              class="card-img-top"
+              alt="{{ activity.name }} image"
+              loading="lazy"
+            >
+            <div class="card-body">
+              <h5 class="card-title">{{ activity.name }}</h5>
+
+              <p class="activity-description">{{ activity.description }}</p>
+              <p class="activity-begin">
+                Begins at: {{this.formatDateTime(activity.dateTime)}}
+              </p>
+              <p class="activity-time">Duration: {{activity.duration}} min</p>
+              <p class="activity-price">Price: {{ activity.price }} EUR</p>
+              <a [routerLink]="['/activity', activity.studioActivityId]" class="btn btn-primary">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

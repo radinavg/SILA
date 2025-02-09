@@ -1,0 +1,116 @@
+
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Card styling */
+.category-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  min-height: 80px;
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+
+  margin: 10px;
+
+  .card-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+    text-align: center;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .studio-card {
+    max-width: 400px;
+    margin: 10px auto; /* Center-align on medium-sized screens */
+  }
+
+  .card-img-top {
+    height: 120px;
+  }
+
+  .card-title {
+    font-size: 0.95rem;
+  }
+
+  .card-text {
+    font-size: 0.8rem;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .studio-card {
+    flex-direction: column;
+    max-width: 100%; /* Allow full-width cards on smaller screens */
+    margin: 10px 0;
+    box-shadow: none; /* Simplify design for smaller screens */
+  }
+
+  .card-img-top {
+    height: 100px;
+  }
+
+  .btn-primary {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .category-card {
+    max-width: 150px; /* Compact cards for smaller devices */
+    min-height: 60px;
+    padding: 8px;
+    margin: 5px; /* Reduce margin to fit more cards */
+  }
+}
+
+@media (max-width: 480px) {
+  .studio-card {
+    flex-direction: column;
+    padding: 10px;
+    box-shadow: none;
+    border: 1px solid #eee;
+    max-width: 100%;
+  }
+
+  .card-img-top {
+    height: 80px;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+  }
+
+  .card-text {
+    font-size: 0.75rem;
+  }
+
+  .btn-primary {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+}

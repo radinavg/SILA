@@ -1,0 +1,130 @@
+<div class="container mt-5">
+  <div class="profile-header">
+    <div class="profile-image">
+      <img *ngIf="studio.profileImage" src="{{globals.formatProfileImageUrl(studio.profileImage.path)}}" [alt]="studio.profileImage.name + ' profile image'"/>
+      <img *ngIf="!studio.profileImage" src="" alt="Profile" />
+    </div>
+    <div class="profile-info">
+      <h2 class="username"> {{studio.name}}</h2>
+
+      <div class="star-rating">
+        <span *ngFor="let star of getAverageStars()">{{ star }}</span>
+        <span class="rating-points">{{ averageRating.toFixed(1) }} / 5</span>
+        <span class="review-count">
+          ({{ reviewCount }} reviews)
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div *ngIf="!hasUserReviewed()" class="review-form card">
+    <div class="card-body d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <form (submit)="submitReview(rating, reviewText.value)">
+          <h4>Tell more about your experience in {{studio.name}}!</h4>
+          <div class="mb-3">
+            <label class="form-label">Rating</label>
+            <div class="input-star-rating">
+              <span
+                *ngFor="let star of ratingStars; let i = index"
+                [class.filled]="i < hoveredRating || i < rating"
+                (click)="setRating(i + 1)"
+                (mouseover)="setHoveredRating(i + 1)"
+                (mouseleave)="clearHoveredRating()"
+                class="star"
+              >
+                &#9733;
+              </span>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="reviewText" class="form-label">Your Review</label>
+            <textarea id="reviewText" class="form-control" #reviewText rows="4"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit Review</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container mt-5">
+  <div *ngIf="total === 0" class="alert alert-info">
+    There are no given reviews yet. Share your feedback, helps others!
+  </div>
+  <div *ngFor="let review of reviewsDataSource.data" class="card mb-3">
+    <div class="card-body d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <img
+          [src]="getUserProfileImagePath(review.user)"
+          alt="Profile Image"
+          class="user-profile-image me-3"
+        >
+        <div>
+          <div  class="d-flex align-items-center">
+            <h5 class="card-title mb-1">
+              {{ review.user.firstName }} {{ review.user.lastName }}
+            </h5>
+            <small class="text-muted ms-2"> • {{ review.createdAt | date: 'MMM d, y, h:mm a' }}</small>
+          </div>
+          <!-- Editable Star Rating Section -->
+          <div *ngIf="editingReview?.reviewId === review.reviewId">
+            <div class="mb-3">
+              <label class="form-label">Rating</label>
+              <div class="input-star-rating">
+                <span
+                  *ngFor="let star of ratingStars; let i = index"
+                  [class.filled]="i < hoveredRating || i < editingReview.rating"
+                  (click)="setEditingRating(i + 1)"
+                  (mouseover)="setHoveredRating(i + 1)"
+                  (mouseleave)="clearHoveredRating()"
+                  class="star"
+                >
+                  &#9733;
+                </span>
+              </div>
+            </div>
+            <textarea [(ngModel)]="editingReview.text" class="form-control mb-2"></textarea>
+            <button class="btn btn-success me-2" (click)="saveEdit()">Save</button>
+            <button class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+          </div>
+
+          <!-- Normal Display Section -->
+          <div *ngIf="editingReview?.reviewId !== review.reviewId">
+            <div class="user-review-rating">
+              <ng-container *ngFor="let star of getStars(review.rating); let i = index">
+                <span [class.filled]="star === 'full'">{{ star === 'full' ? '★' : '☆' }}</span>
+              </ng-container>
+              <span class="user-rating-points">{{review.rating}}/5</span>
+            </div>
+            <p class="card-text mb-1">{{ review.text }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit and Delete Buttons -->
+      <div *ngIf="review.user.email === authService.getUserEmail()  && editingReview?.reviewId !== review.reviewId">
+        <button class="btn btn-outline-secondary me-2" (click)="startEdit(review)">
+          <i class="bi bi-pencil"></i>
+        </button>
+        <button class="btn btn-outline-secondary" (click)="deleteReview(review.reviewId)">
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="total > 10">
+    <mat-paginator
+      [length]="total"
+      [pageSizeOptions]="[10, 20, 30]"
+      (page)="pageChanged($event)"
+      showFirstLastButtons="true"
+      aria-label="Select page of users">
+    </mat-paginator>
+  </div>
+</div>

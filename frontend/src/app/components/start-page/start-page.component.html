@@ -1,0 +1,30 @@
+<div class="container-fluid vh-100 d-flex flex-column">
+  <!-- Left Side -->
+  <div class="row flex-grow-1">
+    <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center text-center" *ngIf="!authService.isLoggedIn()">
+      <img src="assets/start.png" alt="Logo" class="img-fluid w-75 mb-4">
+      <div>
+        <p class="text-success fw-bold">You are a studio owner and want to promote your studio on Sila?</p>
+        <a class="btn btn-success btn-lg" routerLink="/form" role="button">Promote Your Studio</a>
+      </div>
+    </div>
+
+    <!-- Right Side -->
+    <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center text-center" *ngIf="!authService.isLoggedIn()">
+      <div class="text-center">
+        <img src="assets/silaTextLogo.png" alt="App Logo" class="img-fluid mb-4" style="max-width: 200px;">
+        <h1 class="display-4 text-success fw-bold">Unlock Your Fitness Experience!</h1>
+        <p class="text-muted">Welcome to Sila!</p>
+        <div class="d-flex justify-content-center gap-2 mt-3">
+          <a class="btn btn-success btn-lg" routerLink="/login" role="button">Login</a>
+          <a class="btn btn-secondary btn-lg" routerLink="/register" role="button">Register</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-auto text-center py-3">
+    <p class="text-muted">Copyrights: ASE Group: 24ws-ase-pr-inso-01</p>
+  </footer>
+</div>

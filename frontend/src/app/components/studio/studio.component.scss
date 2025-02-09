@@ -1,0 +1,571 @@
+/* Profile container - responsive width */
+.profile-container {
+  max-width: 90%; /* Make the container fluid on smaller screens */
+  width: 100%;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  text-align: left;
+}
+
+/* Profile header with image and username */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+}
+
+/* Profile image styling */
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Username styling */
+.username {
+  margin: 0;
+  font-size: 2em;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Star rating styling */
+.star-rating {
+  color: #ffc107;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rating-points {
+  font-size: 0.9em;
+  color: #555;
+  margin-left: 8px;
+}
+
+.review-count {
+  font-size: 0.9em;
+  color: #777;
+}
+
+/* Profile details styling */
+.profile-details {
+  margin-top: 30px;
+}
+
+.description {
+  font-size: 1.2em;
+  color: #555;
+  margin: 15px 0;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1em;
+  color: #777;
+}
+
+.location-icon {
+  color: #32cd32;
+  font-size: 1.2em;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .username {
+    font-size: 1.8em;
+  }
+
+  .star-rating {
+    font-size: 1.2em;
+  }
+
+  .description {
+    font-size: 1.1em;
+  }
+
+  .location {
+    font-size: 0.9em;
+  }
+}
+
+
+
+/* Gallery container styling */
+.gallery-container {
+  max-width: 90%;
+  width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  text-align: left;
+}
+
+.gallery-title {
+  font-size: 1.8em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+
+.gallery-grid {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive columns */
+}
+
+.gallery-item {
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item img:hover {
+  transform: scale(1.1);
+}
+
+/* Book Now button styling */
+.book-now-button {
+
+  position: absolute;
+  width: 130px;
+  height: 50px;
+  top: 60px;
+  right: 40px;
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #32cd32; /* Green color */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.like-button {
+  position: absolute;
+  padding: 10px 20px;
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  justify-content: center; /* Center the icon horizontally */
+  align-items: center; /* Center the icon vertically */
+
+  top: 60px;
+  right: 175px;
+  background-color: #d53f59;
+  font-size: 1em;
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.like-button-heart {
+  font-size: 1em; /* Ensure the icon size is appropriate for the button */
+}
+
+.book-now-button:hover {
+  background-color: #218421; /* Darker green on hover */
+}
+
+.like-button:hover {
+  background-color: #9f0e24; /* Darker green on hover */
+}
+
+/* Adjust the position of the button within the profile container */
+.profile-container {
+  position: relative; /* Enables positioning of the Book Now button */
+}
+
+
+/* Responsive adjustments for gallery */
+@media (max-width: 768px) {
+  .gallery-grid {
+    gap: 10px;
+  }
+}
+
+
+/* Extra small screens adjustments */
+@media (max-width: 480px) {
+
+  .gallery-container {
+    padding: 15px;
+  }
+
+  .gallery-title {
+    font-size: 1.5em;
+  }
+
+  .profile-container {
+    padding: 15px;
+  }
+
+  .profile-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .username {
+    font-size: 1.5em;
+  }
+
+  .star-rating {
+    font-size: 1em;
+  }
+
+  .description {
+    font-size: 1em;
+  }
+
+  .location {
+    font-size: 0.8em;
+  }
+}
+
+
+/* Activities container styling */
+.activities-container {
+  max-width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.activities-title {
+  font-size: 1.8em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.activities-slider {
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2em;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.left-arrow {
+  left: 10px;
+}
+
+.right-arrow {
+  right: 10px;
+}
+
+.activity-cards {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.3s ease;
+}
+
+.activity-card {
+  min-width: 250px;
+  max-width: 300px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: left;
+  padding: 15px;
+}
+
+.activity-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.activity-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+  margin: 10px 0;
+}
+
+.activity-description, .activity-time, .activity-price {
+  font-size: 1em;
+  color: #777;
+}
+
+@media (max-width: 768px) {
+  .activity-card {
+    min-width: 200px;
+  }
+}
+
+.faq-container {
+  max-width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.faq-title {
+  font-size: 1.8em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.faq-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+}
+
+.faq-answer {
+  padding: 10px 0;
+  color: #777;
+}
+
+.faq-toggle-icon {
+  font-size: 1.2em;
+  color: #333;
+  transition: transform 0.3s ease;
+}
+
+/* Carousel container styling */
+.carousel-container {
+  max-width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.carousel-title {
+  font-size: 1.8em;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: left;  /* Aligns title to the left */
+}
+
+.carousel-image-wrapper {
+  position: relative;
+  max-width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Transition for carousel image */
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  opacity: 0;  /* Start with opacity 0 */
+  transition: opacity 0.5s ease;  /* Fading effect with smooth transition */
+}
+
+.carousel-image.show {
+  opacity: 1;  /* Image fades in by changing opacity to 1 */
+}
+
+/* Arrow button styling */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.5em;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-arrow.left {
+  left: 10px;
+}
+
+.carousel-arrow.right {
+  right: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .carousel-image-wrapper {
+    height: 250px;
+  }
+
+  .carousel-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2em;
+  }
+}
+
+/* Add New FAQ Card styling - Match Profile Container */
+.add-faq-card {
+  max-width: 90%;
+  width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  text-align: left;
+}
+
+/* Title styling */
+.add-faq-title {
+  font-size: 1em;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Input field styling */
+.input-style {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Button styling to match the "Add FAQ" button with profile buttons */
+.btn-primary {
+  background-color: #32cd32;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+  transition: background-color 0.3s ease;
+  width: 50%;
+}
+
+/* Style for the "+" button to add a new FAQ */
+.add-faq-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1em;
+  cursor: pointer;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.add-faq-toggle-icon {
+  font-size: 1.1em;
+}
+
+.add-faq-text {
+  font-size: 1.1em;
+}
+.custom-btn {
+  position: relative;
+  border: none;
+  padding: 0.75rem;
+  width: 80px;
+  height: 80px;
+  font-size: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.custom-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  background-color: #28a745; /* Darker green on hover */
+}
+
+.custom-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+

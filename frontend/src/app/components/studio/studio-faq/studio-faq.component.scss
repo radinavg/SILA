@@ -1,0 +1,104 @@
+/* Add New FAQ Card styling - Match Profile Container */
+.add-faq-card {
+  max-width: 90%;
+  width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  text-align: left;
+}
+
+/* Title styling */
+.add-faq-title {
+  font-size: 1em;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Input field styling */
+.input-style {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Button styling to match the "Add FAQ" button with profile buttons */
+.btn-primary {
+  background-color: #32cd32;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+  transition: background-color 0.3s ease;
+  width: 50%;
+}
+
+/* Style for the "+" button to add a new FAQ */
+.add-faq-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1em;
+  cursor: pointer;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.add-faq-toggle-icon {
+  font-size: 1.1em;
+}
+
+.add-faq-text {
+  font-size: 1.1em;
+}
+
+.faq-container {
+  max-width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.faq-title {
+  font-size: 1.8em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.faq-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+}
+
+.faq-answer {
+  padding: 10px 0;
+  color: #777;
+}
+
+.faq-toggle-icon {
+  font-size: 1.2em;
+  color: #333;
+  transition: transform 0.3s ease;
+}

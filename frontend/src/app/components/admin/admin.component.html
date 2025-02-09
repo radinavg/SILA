@@ -1,0 +1,58 @@
+<div class="container mt-5">
+  <h3 class="mb-4">Studios Awaiting Approval</h3>
+
+  <!-- Alert for no studios -->
+  <div *ngIf="studios.length === 0" class="alert alert-info">
+    No studios are waiting for approval at the moment.
+  </div>
+
+  <!-- Studios list -->
+  <div *ngFor="let studio of studios" class="card mb-3">
+    <div class="card-body d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <!-- Studio profile image -->
+        <img
+          [src]="getStudioImagePath(studio)"
+          alt="Studio Image"
+          class="studio-profile-image me-3"
+          loading="lazy"
+        >
+        <div>
+          <!-- Studio name and location -->
+          <h5 class="card-title mb-1">
+            {{ studio.name }}
+          </h5>
+          <p class="card-text mb-0">{{ studio.location }}</p>
+        </div>
+      </div>
+      <!-- Buttons -->
+      <div>
+        <button class="btn btn-info me-2" (click)="openModal(studio, studioModal)" [attr.data-bs-target]="'#studioModal'">
+          View Details
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for studio details -->
+  <ng-template #studioModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title">Studio Details</h5>
+      <button type="button" class="btn-close" (click)="modal.dismiss('Close click')" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <p><strong>Name:</strong> {{ selectedStudio?.name }}</p>
+      <p><strong>Email:</strong> {{ selectedStudio?.email }}</p>
+      <p><strong>Description:</strong> {{ selectedStudio?.description }}</p>
+      <p><strong>Location:</strong> {{ selectedStudio?.location }}</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-success me-2" (click)="approveStudio(selectedStudio, modal)">
+        Approve
+      </button>
+      <button class="btn btn-danger" (click)="deleteStudio(selectedStudio, modal)">
+        Decline
+      </button>
+    </div>
+  </ng-template>
+</div>
